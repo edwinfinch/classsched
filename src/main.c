@@ -2,13 +2,13 @@
 #include "main.h"
 #include "services.h"
 #include "window_data.h"
+#include "elements.h"
 	
 void define_windows(){
 	wf_window = window_create();
 	main_window = window_create();
 	class_window = window_create();
 	info_window = window_create();
-	settings_window = window_create();
 	aboot_window = window_create();
 	
 	window_set_window_handlers(main_window, (WindowHandlers){
@@ -26,10 +26,6 @@ void define_windows(){
 	window_set_window_handlers(info_window, (WindowHandlers){
 		.load = w_l_info,
 		.unload = w_ul_info,
-	});
-	window_set_window_handlers(settings_window, (WindowHandlers){
-		.load = w_l_settings,
-		.unload = w_ul_settings,
 	});
 	window_set_window_handlers(aboot_window, (WindowHandlers){
 		.load = w_l_aboot,
@@ -53,6 +49,9 @@ void services_handler(bool type){
 }
 
 void launch(){
+	//int value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
+	//APP_LOG(APP_LOG_LEVEL_INFO, "Read %d bytes from settings.", value);
+	window_set_fullscreen(wf_window, true);
 	window_stack_push(wf_window, true);
 }
 
@@ -61,8 +60,10 @@ void deinit(){
 	window_destroy(wf_window);
 	window_destroy(class_window);
 	window_destroy(info_window);
-	window_destroy(settings_window);
 	window_destroy(aboot_window);
+	
+	//int value = persist_write_data(SETTINGS_KEY, &settings, sizeof(settings));
+	//APP_LOG(APP_LOG_LEVEL_INFO, "%d bytes written to settings.", value);
 }
 	
 int main(){
