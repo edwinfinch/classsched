@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include "elements.h"
+#include "data_framework.h"
 	
 #define SETTINGS_KEY 0
 #define CLASS_DATA_KEY_1 1
@@ -36,14 +37,14 @@ float get_class_time(int timeslot, Class class){
 	return data;
 }
 
-char get_professor(Class class){
-	char prof[21] = "Mr. NULL";
+char* get_professor(Class class){
+	char *prof = "Mr. NULL";
 	prof = class.prof;
 	return prof;
 }
 
-char get_code(Class class){
-	char code[8] = "060898";
+char* get_code(Class class){
+	char *code = "060898";
 	code = class.code;
 	return code;
 }
@@ -63,7 +64,7 @@ void set_class_time(int timeslot, bool isExtra, int class, float data){
 	}
 }
 
-void set_professor(int class, bool isExtra, char prof){
+void set_professor(int class, bool isExtra, char *prof){
 	if(isExtra == 0){	
 		main_data.classes[class].prof = prof;
 	}
@@ -72,12 +73,12 @@ void set_professor(int class, bool isExtra, char prof){
 	}
 }
 
-void set_code(int class, bool isExtra, char code){
+void set_code(int class, bool isExtra, char *code){
 	if(isExtra == 0){	
-		main_data.classes[class].prof = prof;
+		main_data.classes[class].code = code;
 	}
 	else{
-		extra_data.classes[class].prof = prof;
+		extra_data.classes[class].code = code;
 	}
 }
 
@@ -86,7 +87,7 @@ void class_set_lecture(int class, bool isExtra, bool isLecture){
 		main_data.classes[class].isLecture = isLecture;
 	}
 	else{
-		extra_data.classes[class].isLecture = prof;
+		extra_data.classes[class].isLecture = isLecture;
 	}
 }
 

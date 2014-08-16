@@ -7,8 +7,8 @@ typedef struct persist {
 //50 bytes
 typedef struct Class {
 	bool isLecture; //1 byte
-	char prof[21]; //21 bytes (?)
-	char code[8]; //8 bytes
+	char *prof; //21 bytes (?)
+	char *code; //8 bytes
 	float times[5]; //5 bytes*4 == ??? :P
 } Class;
 
