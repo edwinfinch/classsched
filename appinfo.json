@@ -1,0 +1,32 @@
+{
+    "appKeys": {
+        "m_c1_code": 1,
+        "m_c1_end": 4,
+        "m_c1_prof": 0,
+        "m_c1_start": 3,
+        "m_c1_type": 2
+    },
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "Edwin Finch",
+    "longName": "ClassSched",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/classes-icon.png",
+                "menuIcon": true,
+                "name": "MENU",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "ClassSched",
+    "uuid": "0bb26b12-8c68-44aa-bb56-35232efd4f2f",
+    "versionCode": 1,
+    "versionLabel": "0.1",
+    "watchapp": {
+        "watchface": false
+    }
+}
