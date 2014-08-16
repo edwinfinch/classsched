@@ -1,6 +1,7 @@
 #include <pebble.h>
 #include "window_data.h"
 #include "extras.h"
+#include "services.h"
 	
 TextLayer *aboot_edwin, *aboot_daedgoco, *aboot_version;
 InverterLayer *aboot_theme;
@@ -14,7 +15,7 @@ void w_ul_main(Window *w){
 }
 
 void w_l_wf(Window *w){
-	
+	window_set_click_config_provider(w, config_provider);
 }
 
 void w_ul_wf(Window *w){

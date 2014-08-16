@@ -15,6 +15,8 @@ bool isExtra is referring to extra_data in any case.
 	
 CD main_data, extra_data;
 
+persist settings;
+
 /*
 50 bytes
 typedef struct Class {
@@ -91,24 +93,30 @@ void class_set_lecture(int class, bool isExtra, bool isLecture){
 	}
 }
 
-int save_data(bool isExtra){
+int save_data(int toSave){
 	int returned = 0;
-	if(isExtra){
+	if(toSave == 1){
 		returned = persist_write_data(CLASS_DATA_KEY_2, &extra_data, sizeof(extra_data));
 	}
-	else{
+	else if(toSave == 0){
 		returned = persist_write_data(CLASS_DATA_KEY_1, &main_data, sizeof(main_data));
+	}
+	else if(toSave == 2){
+		returned = persist_write_data(SETTINGS_KEY, &settings, sizeof(settings));
 	}
 	return returned;
 }
 
-int load_data(bool isExtra){
+int load_data(int toSave){
 	int returned = 0;
-	if(isExtra){
+	if(toSave == 1){
 		returned = persist_read_data(CLASS_DATA_KEY_2, &extra_data, sizeof(extra_data));
 	}
-	else{
+	else if(toSave == 0){
 		returned = persist_read_data(CLASS_DATA_KEY_1, &main_data, sizeof(main_data));
+	}
+	else if(toSave == 2){
+		returned = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
 	}
 	return returned;
 }

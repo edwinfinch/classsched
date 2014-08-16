@@ -1,37 +1,9 @@
 #include <pebble.h>
-#include "main.h"
 #include "services.h"
 #include "window_data.h"
 #include "elements.h"
-	
-void define_windows(){
-	wf_window = window_create();
-	main_window = window_create();
-	class_window = window_create();
-	info_window = window_create();
-	aboot_window = window_create();
-	
-	window_set_window_handlers(main_window, (WindowHandlers){
-		.load = w_l_main,
-		.unload = w_ul_main,
-	});
-	window_set_window_handlers(wf_window, (WindowHandlers){
-		.load = w_l_wf,
-		.unload = w_ul_wf,
-	});
-	window_set_window_handlers(class_window, (WindowHandlers){
-		.load = w_l_class,
-		.unload = w_ul_class,
-	});
-	window_set_window_handlers(info_window, (WindowHandlers){
-		.load = w_l_info,
-		.unload = w_ul_info,
-	});
-	window_set_window_handlers(aboot_window, (WindowHandlers){
-		.load = w_l_aboot,
-		.unload = w_ul_aboot,
-	});
-}
+#include "window_service.h"
+#include "data_framework.h"
 
 void services_handler(bool type){
 	if(type == 1){
@@ -49,21 +21,21 @@ void services_handler(bool type){
 }
 
 void launch(){
-	//int value = persist_read_data(SETTINGS_KEY, &settings, sizeof(settings));
-	//APP_LOG(APP_LOG_LEVEL_INFO, "Read %d bytes from settings.", value);
-	window_set_fullscreen(wf_window, true);
-	window_stack_push(wf_window, true);
+	int value = load_data(0);
+	int value1 = load_data(1);
+	int value2 = load_data(2);
+	APP_LOG(APP_LOG_LEVEL_INFO, "Loaded %d, %d, and %d bytes of data.", value, value1, value2);
+	
+	window_push(0);
 }
 
 void deinit(){
-	window_destroy(main_window);
-	window_destroy(wf_window);
-	window_destroy(class_window);
-	window_destroy(info_window);
-	window_destroy(aboot_window);
+	deinit_windows();
 	
-	//int value = persist_write_data(SETTINGS_KEY, &settings, sizeof(settings));
-	//APP_LOG(APP_LOG_LEVEL_INFO, "%d bytes written to settings.", value);
+	int value = save_data(0);
+	int value1 = save_data(1);
+	int value2 = save_data(2);
+	APP_LOG(APP_LOG_LEVEL_INFO, "Saved %d, %d, and %d bytes of data.", value, value1, value2);
 }
 	
 int main(){

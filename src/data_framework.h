@@ -11,5 +11,5 @@ void set_class_time(int timeslot, bool isExtra, int class, float data);
 void set_professor(int class, bool isExtra, char *prof);
 void set_code(int class, bool isExtra, char *code);
 void class_set_lecture(int class, bool isExtra, bool isLecture);
-int save_data(bool isExtra);
-int load_data(bool isExtra);
+int save_data(int type);
+int load_data(int type);
