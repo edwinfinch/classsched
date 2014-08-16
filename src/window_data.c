@@ -2,6 +2,7 @@
 #include "window_data.h"
 #include "extras.h"
 #include "services.h"
+#include "BLKS.h"
 	
 TextLayer *aboot_edwin, *aboot_daedgoco, *aboot_version;
 InverterLayer *aboot_theme;
@@ -16,10 +17,11 @@ void w_ul_main(Window *w){
 
 void w_l_wf(Window *w){
 	window_set_click_config_provider(w, config_provider);
+	load_blks(w);
 }
 
 void w_ul_wf(Window *w){
-	
+	unload_blks();
 }
 
 void w_l_info(Window *w){

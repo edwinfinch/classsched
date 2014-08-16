@@ -10,6 +10,7 @@ void services_handler(bool type){
 		tick_timer_service_subscribe(SECOND_UNIT, &tick_handler);
 		bluetooth_connection_service_subscribe(bt_handler);
 		battery_state_service_subscribe(bat_handler);
+		accel_tap_service_subscribe(&tap);
 		app_message_register_inbox_received(app_m_inbox);
 	}
 	//unsubscribe
@@ -17,6 +18,7 @@ void services_handler(bool type){
 		tick_timer_service_unsubscribe();
 		bluetooth_connection_service_unsubscribe();
 		battery_state_service_unsubscribe();
+		accel_tap_service_unsubscribe();
 	}
 }
 
