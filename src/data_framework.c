@@ -21,15 +21,33 @@ persist settings;
 50 bytes
 typedef struct Class {
 	bool isLecture; //1 byte
-	char prof[21]; //21 bytes (?)
-	char code[8]; //8 bytes
+	char *prof; //21 bytes (?)
+	char *code; //8 bytes
+	char *name;
 	float times[5]; //20 bytes
+	bool exists[5];
 } Class;
 */
 
 Class get_class(bool isExtra, int toGet){
 	Class data;
-	data = main_data.classes[toGet];
+	if(!isExtra){
+		data = main_data.classes[toGet];
+	}
+	else{
+		data = extra_data.classes[toGet];
+	}
+	return data;
+}
+
+bool class_exists(int class){
+	bool data = 0;
+	if(class > 3){
+		data = extra_data.classes[class-4].exists[class-4];
+	}
+	else{
+		data = main_data.classes[class-1].exists[class-1];
+	}
 	return data;
 }
 
@@ -51,6 +69,12 @@ char* get_code(Class class){
 	return code;
 }
 
+char* get_name(Class class){
+	char *name = "Mr. Quosai";
+	name = class.name;
+	return name;
+}
+
 bool class_is_lecture(Class class){
 	bool lecture;
 	lecture = class.isLecture;
@@ -63,6 +87,15 @@ void set_class_time(int timeslot, bool isExtra, int class, float data){
 	}
 	else{
 		extra_data.classes[class].times[timeslot] = data;
+	}
+}
+
+void set_exists(int class, bool isExtra, bool exists){
+	if(class > 3){
+		extra_data.classes[class-4].exists[class-4] = exists;
+	}
+	else{
+		main_data.classes[class-1].exists[class-1] = exists;
 	}
 }
 
@@ -81,6 +114,15 @@ void set_code(int class, bool isExtra, char *code){
 	}
 	else{
 		extra_data.classes[class].code = code;
+	}
+}
+
+void set_name(int class, bool isExtra, char *name){
+	if(isExtra == 0){	
+		main_data.classes[class].name = name;
+	}
+	else{
+		extra_data.classes[class].name = name;
 	}
 }
 

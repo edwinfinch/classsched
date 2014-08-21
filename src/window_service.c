@@ -13,6 +13,9 @@ void window_push(int window){
 		case 2:
 			window_stack_push(main_window, true);
 			break;
+		case 3:
+			window_stack_push(info_window, true);
+			break;
 	}
 }
 
@@ -54,11 +57,11 @@ void deinit_windows(){
 	window_destroy(aboot_window);
 }
 
-Window* get_window(int window){
+Window* window_get_window(int window){
 	Window *returned;
 	switch(window){
 		case 0:
-			returned = wf_window;
+			returned = main_window;
 			break;
 		default:
 			returned = main_window;
