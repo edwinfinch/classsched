@@ -1,6 +1,7 @@
 #include <pebble.h>
 #include "BLKS.h"
 #include "blks_elements.h"
+#include "window_service.h"
 	
 void animation_callback(void *data);
 	
@@ -126,6 +127,11 @@ int get_minute_change(){
 }
 
 void blks_tick(struct tm *t, TimeUnits units_changed){
+	//Prevent crashing
+	bool is_not_blks = window_stack_contains_window(window_get_window(0));
+	if(is_not_blks){
+		return;
+	}
 	minute = t->tm_min;
 	hour = t->tm_hour;
 	seconds = t->tm_sec;

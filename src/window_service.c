@@ -2,6 +2,8 @@
 #include "main.h"
 #include "window_data.h"
 	
+bool window_is_blks = 0;
+	
 void window_push(int window){
 	switch(window){
 		case 0:
@@ -50,11 +52,7 @@ void define_windows(){
 }
 
 void deinit_windows(){
-	window_destroy(main_window);
 	window_destroy(wf_window);
-	window_destroy(class_window);
-	window_destroy(info_window);
-	window_destroy(aboot_window);
 }
 
 Window* window_get_window(int window){

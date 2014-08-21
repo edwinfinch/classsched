@@ -23,7 +23,7 @@ static SimpleMenuItem first_menu_items[NUM_FIRST_MENU_ITEMS];
 static SimpleMenuItem second_menu_items[NUM_SECOND_MENU_ITEMS];
 	
 void w_l_main(Window *w){
-	set_exists(0, 0, 1);
+	set_exists(1, 0, 1);
 	set_name(0, 0, "Physics");
 	GRect frame = layer_get_frame(window_get_root_layer(w));
 	
@@ -78,7 +78,7 @@ void w_l_main(Window *w){
 		.num_items = NUM_SECOND_MENU_ITEMS,
 		.items = second_menu_items,
     };
-	
+
 	if(class_exists(1)){
 		static char *buffer;
 		buffer = get_name(get_class(0, 0));
@@ -100,16 +100,18 @@ void w_l_main(Window *w){
 	if(class_exists(6)){
 		
 	}
-	
+
 	main_menu = simple_menu_layer_create(frame, w, menu_sections, NUM_MENU_SECTIONS, NULL);
 	layer_add_child(window_get_root_layer(w), simple_menu_layer_get_layer(main_menu));
 }
 
 void w_ul_main(Window *w){
+	APP_LOG(APP_LOG_LEVEL_INFO, "Unloading main menu");
 	simple_menu_layer_destroy(main_menu);
 }
 
 void w_l_wf(Window *w){
+	APP_LOG(APP_LOG_LEVEL_INFO, "Loading watchface window");
 	window_set_click_config_provider(w, config_provider);
 	load_blks(w);
 }

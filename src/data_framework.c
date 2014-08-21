@@ -118,6 +118,7 @@ void set_code(int class, bool isExtra, char *code){
 }
 
 void set_name(int class, bool isExtra, char *name){
+	APP_LOG(APP_LOG_LEVEL_INFO, "Got char %s", name);
 	if(isExtra == 0){	
 		main_data.classes[class].name = name;
 	}

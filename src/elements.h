@@ -16,7 +16,7 @@ typedef struct Class {
 
 //46*5 == 230 bytes
 typedef struct CD {
-	Class classes[3];
+	Class classes[4];
 } CD;
 
 //main_data.class1.isLecture;
