@@ -23,6 +23,8 @@ static SimpleMenuItem first_menu_items[NUM_FIRST_MENU_ITEMS];
 static SimpleMenuItem second_menu_items[NUM_SECOND_MENU_ITEMS];
 	
 void w_l_main(Window *w){
+	set_exists(0, 0, 1);
+	//set_professor(0, 0, "Mr. Quosai");
 	GRect frame = layer_get_frame(window_get_root_layer(w));
 	/*
 	All menu items will default have no data available
@@ -77,13 +79,14 @@ void w_l_main(Window *w){
     };
 
 	if(class_exists(1)){
-		static char buffer[21];
-		static char prof_buf[21];
+		static char name_buffer[21] = "Physics";
+		static char prof_buffer[21];
 		Class temp = get_class(0, 0);
-		buffer[0] = temp.name[0];
-		first_menu_items[0].title = buffer;
-		prof_buf[0] = temp.prof[0];
-		first_menu_items[0].subtitle = prof_buf;
+		//name_buffer[] = temp.name[];
+		strcpy(prof_buffer, temp.prof[0]);
+		first_menu_items[0].title = name_buffer;
+		first_menu_items[0].subtitle = prof_buffer;
+		APP_LOG(APP_LOG_LEVEL_INFO, "%s and %s", name_buffer, prof_buffer);
 	}
 
 	main_menu = simple_menu_layer_create(frame, w, menu_sections, NUM_MENU_SECTIONS, NULL);

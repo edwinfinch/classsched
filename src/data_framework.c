@@ -77,35 +77,35 @@ void set_exists(int class, bool isExtra, bool exists){
 		extra_data.classes[class-4].exists[class-4] = exists;
 	}
 	else{
-		main_data.classes[class-1].exists[class-1] = exists;
+		main_data.classes[class].exists[class] = exists;
 	}
 }
 
 void set_professor(int class, bool isExtra, char prof[21]){
 	if(isExtra == 0){	
-		main_data.classes[class].prof[0] = prof[0];
+		strncpy(main_data.classes[class].prof[0], prof, 21);
 	}
 	else{
-		extra_data.classes[class].prof[0] = prof[0];
+		strncpy(extra_data.classes[class].prof[0], prof, 21);
 	}
 }
 
 void set_code(int class, bool isExtra, char code[8]){
 	if(isExtra == 0){	
-		main_data.classes[class].code[0] = code[0];
+		strncpy(main_data.classes[class].code[0], code, 21);
 	}
 	else{
-		extra_data.classes[class].code[0] = code[0];
+		strncpy(extra_data.classes[class].code[0], code, 21);
 	}
 }
 
 void set_name(int class, bool isExtra, char name[21]){
 	APP_LOG(APP_LOG_LEVEL_INFO, "Got char %s", name);
 	if(isExtra == 0){	
-		main_data.classes[class].name[0] = name[0];
+		strncpy(main_data.classes[class].name[0], name, 21);
 	}
 	else{
-		extra_data.classes[class].name[0] = name[0];
+		strncpy(main_data.classes[class].name[0], name, 21);
 	}
 }
 
