@@ -13,23 +13,7 @@ extra_data to compensate for that incase someone needs an extra couple.
 bool isExtra is referring to extra_data in any case.
 */
 	
-CD main_data = {
-	.isLecture
-	.prof = {"Mr. Quosai"},
-	.code = {"Room 600"},
-	.name = {"Computer sciences"},
-	.times = {11.30, 11.45, 11.30, 12.20, 16.40},
-	.exists = {0, 0, 0},
-};
-	
-CD extra_data = {
-	.isLecture
-	.prof = {"Mr. Seigers"},
-	.code = {"Room 601"},
-	.name = {"Wood"},
-	.times = {11.20, 13.45, 9.30, 12.20, 16.40},
-	.exists = {0, 0, 0},
-};
+CD main_data, extra_data;
 
 persist settings;
 
@@ -99,29 +83,29 @@ void set_exists(int class, bool isExtra, bool exists){
 
 void set_professor(int class, bool isExtra, char prof[21]){
 	if(isExtra == 0){	
-		main_data.classes[class].prof[0] = prof;
+		main_data.classes[class].prof[0] = prof[0];
 	}
 	else{
-		extra_data.classes[class].prof[0] = prof;
+		extra_data.classes[class].prof[0] = prof[0];
 	}
 }
 
 void set_code(int class, bool isExtra, char code[8]){
 	if(isExtra == 0){	
-		main_data.classes[class].code[0] = code;
+		main_data.classes[class].code[0] = code[0];
 	}
 	else{
-		extra_data.classes[class].code[0] = code;
+		extra_data.classes[class].code[0] = code[0];
 	}
 }
 
 void set_name(int class, bool isExtra, char name[21]){
 	APP_LOG(APP_LOG_LEVEL_INFO, "Got char %s", name);
 	if(isExtra == 0){	
-		main_data.classes[class].name = name;
+		main_data.classes[class].name[0] = name[0];
 	}
 	else{
-		extra_data.classes[class].name = name;
+		extra_data.classes[class].name[0] = name[0];
 	}
 }
 

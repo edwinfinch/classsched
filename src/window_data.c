@@ -80,9 +80,9 @@ void w_l_main(Window *w){
 		static char buffer[21];
 		static char prof_buf[21];
 		Class temp = get_class(0, 0);
-		buffer = temp.name[0];
+		buffer[0] = temp.name[0];
 		first_menu_items[0].title = buffer;
-		prof_buf = temp.prof[0];
+		prof_buf[0] = temp.prof[0];
 		first_menu_items[0].subtitle = prof_buf;
 	}
 
