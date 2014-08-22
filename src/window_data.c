@@ -23,10 +23,7 @@ static SimpleMenuItem first_menu_items[NUM_FIRST_MENU_ITEMS];
 static SimpleMenuItem second_menu_items[NUM_SECOND_MENU_ITEMS];
 	
 void w_l_main(Window *w){
-	set_exists(1, 0, 1);
-	set_name(0, 0, "Physics");
 	GRect frame = layer_get_frame(window_get_root_layer(w));
-	
 	/*
 	All menu items will default have no data available
 	but if persistent storage finds some data it will use that
@@ -80,25 +77,13 @@ void w_l_main(Window *w){
     };
 
 	if(class_exists(1)){
-		static char *buffer;
-		buffer = get_name(get_class(0, 0));
+		static char buffer[21];
+		static char prof_buf[21];
+		Class temp = get_class(0, 0);
+		buffer = temp.name[0];
 		first_menu_items[0].title = buffer;
-		APP_LOG(APP_LOG_LEVEL_INFO, "%s", buffer);
-	}
-	if(class_exists(2)){
-		
-	}
-	if(class_exists(3)){
-		
-	}
-	if(class_exists(4)){
-		
-	}
-	if(class_exists(5)){
-		
-	}
-	if(class_exists(6)){
-		
+		prof_buf = temp.prof[0];
+		first_menu_items[0].subtitle = prof_buf;
 	}
 
 	main_menu = simple_menu_layer_create(frame, w, menu_sections, NUM_MENU_SECTIONS, NULL);

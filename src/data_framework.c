@@ -13,7 +13,23 @@ extra_data to compensate for that incase someone needs an extra couple.
 bool isExtra is referring to extra_data in any case.
 */
 	
-CD main_data, extra_data;
+CD main_data = {
+	.isLecture
+	.prof = {"Mr. Quosai"},
+	.code = {"Room 600"},
+	.name = {"Computer sciences"},
+	.times = {11.30, 11.45, 11.30, 12.20, 16.40},
+	.exists = {0, 0, 0},
+};
+	
+CD extra_data = {
+	.isLecture
+	.prof = {"Mr. Seigers"},
+	.code = {"Room 601"},
+	.name = {"Wood"},
+	.times = {11.20, 13.45, 9.30, 12.20, 16.40},
+	.exists = {0, 0, 0},
+};
 
 persist settings;
 
@@ -21,11 +37,11 @@ persist settings;
 50 bytes
 typedef struct Class {
 	bool isLecture; //1 byte
-	char *prof; //21 bytes (?)
-	char *code; //8 bytes
-	char *name;
-	float times[5]; //20 bytes
-	bool exists[5];
+	char prof[21]; //21 bytes (?)
+	char code[8]; //8 bytes
+	char name[21];
+	float times[5]; //5 bytes*4 == ??? :P
+	bool exists[3];
 } Class;
 */
 
@@ -57,24 +73,6 @@ float get_class_time(int timeslot, Class class){
 	return data;
 }
 
-char* get_professor(Class class){
-	char *prof = "Mr. NULL";
-	prof = class.prof;
-	return prof;
-}
-
-char* get_code(Class class){
-	char *code = "060898";
-	code = class.code;
-	return code;
-}
-
-char* get_name(Class class){
-	char *name = "Mr. Quosai";
-	name = class.name;
-	return name;
-}
-
 bool class_is_lecture(Class class){
 	bool lecture;
 	lecture = class.isLecture;
@@ -99,25 +97,25 @@ void set_exists(int class, bool isExtra, bool exists){
 	}
 }
 
-void set_professor(int class, bool isExtra, char *prof){
+void set_professor(int class, bool isExtra, char prof[21]){
 	if(isExtra == 0){	
-		main_data.classes[class].prof = prof;
+		main_data.classes[class].prof[0] = prof;
 	}
 	else{
-		extra_data.classes[class].prof = prof;
+		extra_data.classes[class].prof[0] = prof;
 	}
 }
 
-void set_code(int class, bool isExtra, char *code){
+void set_code(int class, bool isExtra, char code[8]){
 	if(isExtra == 0){	
-		main_data.classes[class].code = code;
+		main_data.classes[class].code[0] = code;
 	}
 	else{
-		extra_data.classes[class].code = code;
+		extra_data.classes[class].code[0] = code;
 	}
 }
 
-void set_name(int class, bool isExtra, char *name){
+void set_name(int class, bool isExtra, char name[21]){
 	APP_LOG(APP_LOG_LEVEL_INFO, "Got char %s", name);
 	if(isExtra == 0){	
 		main_data.classes[class].name = name;
