@@ -82,22 +82,36 @@ void w_l_main(Window *w){
 	int i;
 	for(i = 0; i < 6; i++){
 		APP_LOG(APP_LOG_LEVEL_INFO, "Scanning class #%d for existence", i);
-		if(class_exists(i)){
-			static char name_buffer[21] = "Physics";
-			static char prof_buffer[21] = "Mr. Yourmom";
+		int extra_fix;
+		if(i == 2 || i == 3){
+			//isExtra
+			extra_fix = 1;
+		}
+		else if(i == 0 || i == 1){
+			extra_fix = 0;
+		}
+		else if(i == 4 || i == 5){
+			extra_fix = 2;
+		}
+		if(class_exists(i, extra_fix)){
+			static char name_buffer[6][21];
+			static char prof_buffer[6][21];
 			Class temp;
-			if(i > 2){
+			if(i == 2 || i == 3){
 				//isExtra
 				temp = get_class(i, 1);
 			}
-			else{
+			else if(i == 0 || i == 1){
 				temp = get_class(i, 0);
 			}
-			strcpy(name_buffer, temp.name[0]);
-			strcpy(prof_buffer, temp.prof[0]);
-			first_menu_items[i].title = name_buffer;
-			first_menu_items[i].subtitle = prof_buffer;
-			APP_LOG(APP_LOG_LEVEL_INFO, "%d exists: %s and %s", i, name_buffer, prof_buffer);
+			else if(i == 4 || i == 5){
+				temp = get_class(i, 2);
+			}
+			strncpy(name_buffer[i], temp.name[0], 21);
+			strncpy(prof_buffer[i], temp.prof[0], 21);
+			first_menu_items[i].title = name_buffer[i];
+			first_menu_items[i].subtitle = prof_buffer[i];
+			APP_LOG(APP_LOG_LEVEL_INFO, "%d exists: %s and %s", i, name_buffer[i], prof_buffer[i]);
 		}
 	}
 

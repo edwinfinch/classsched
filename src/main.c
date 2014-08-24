@@ -12,6 +12,7 @@ void services_handler(bool type){
 		battery_state_service_subscribe(bat_handler);
 		accel_tap_service_subscribe(&tap);
 		app_message_register_inbox_received(app_m_inbox);
+		app_message_open(1028, 512);
 	}
 	//unsubscribe
 	else{
@@ -26,7 +27,8 @@ void launch(){
 	int value = load_data(0);
 	int value1 = load_data(1);
 	int value2 = load_data(2);
-	APP_LOG(APP_LOG_LEVEL_INFO, "Loaded %d, %d, and %d bytes of data.", value, value1, value2);
+	int value3 = load_data(3);
+	APP_LOG(APP_LOG_LEVEL_INFO, "Loaded %d, %d, %d (class data) and %d (settings) bytes of data.", value, value1, value3, value2);
 	
 	window_push(0);
 }
@@ -37,7 +39,8 @@ void deinit(){
 	int value = save_data(0);
 	int value1 = save_data(1);
 	int value2 = save_data(2);
-	APP_LOG(APP_LOG_LEVEL_INFO, "Saved %d, %d, and %d bytes of data.", value, value1, value2);
+	int value3 = save_data(3);
+	APP_LOG(APP_LOG_LEVEL_INFO, "Saved %d, %d, %d (class data) and %d (settings) bytes of data.", value, value1, value3, value2);
 }
 	
 int main(){
