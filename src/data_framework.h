@@ -3,6 +3,7 @@
 #include "elements.h"
 
 Class get_class(bool isExtra, int toGet);
+void set_class(Class class, int classNum, bool isExtra);
 float get_class_time(int timeslot, Class class);
 bool class_is_lecture(Class class);
 void set_class_time(int timeslot, bool isExtra, int class, float data);

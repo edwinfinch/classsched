@@ -23,7 +23,8 @@ static SimpleMenuItem first_menu_items[NUM_FIRST_MENU_ITEMS];
 static SimpleMenuItem second_menu_items[NUM_SECOND_MENU_ITEMS];
 	
 void w_l_main(Window *w){
-	set_exists(0, 0, 1);
+	//Debug
+	//set_exists(0, 0, 1);
 	//set_professor(0, 0, "Mr. Quosai");
 	GRect frame = layer_get_frame(window_get_root_layer(w));
 	/*
@@ -78,15 +79,26 @@ void w_l_main(Window *w){
 		.items = second_menu_items,
     };
 
-	if(class_exists(1)){
-		static char name_buffer[21] = "Physics";
-		static char prof_buffer[21];
-		Class temp = get_class(0, 0);
-		//name_buffer[] = temp.name[];
-		strcpy(prof_buffer, temp.prof[0]);
-		first_menu_items[0].title = name_buffer;
-		first_menu_items[0].subtitle = prof_buffer;
-		APP_LOG(APP_LOG_LEVEL_INFO, "%s and %s", name_buffer, prof_buffer);
+	int i;
+	for(i = 0; i < 6; i++){
+		APP_LOG(APP_LOG_LEVEL_INFO, "Scanning class #%d for existence", i);
+		if(class_exists(i)){
+			static char name_buffer[21] = "Physics";
+			static char prof_buffer[21] = "Mr. Yourmom";
+			Class temp;
+			if(i > 2){
+				//isExtra
+				temp = get_class(i, 1);
+			}
+			else{
+				temp = get_class(i, 0);
+			}
+			strcpy(name_buffer, temp.name[0]);
+			strcpy(prof_buffer, temp.prof[0]);
+			first_menu_items[i].title = name_buffer;
+			first_menu_items[i].subtitle = prof_buffer;
+			APP_LOG(APP_LOG_LEVEL_INFO, "%d exists: %s and %s", i, name_buffer, prof_buffer);
+		}
 	}
 
 	main_menu = simple_menu_layer_create(frame, w, menu_sections, NUM_MENU_SECTIONS, NULL);

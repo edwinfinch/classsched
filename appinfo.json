@@ -1,10 +1,19 @@
 {
     "appKeys": {
-        "m_c1_code": 1,
-        "m_c1_end": 4,
-        "m_c1_prof": 0,
-        "m_c1_start": 3,
-        "m_c1_type": 2
+        "code": 2,
+        "end_mon": 6,
+        "end_thu": 12,
+        "end_tue": 8,
+        "end_wed": 10,
+        "name": 4,
+        "number": 0,
+        "prof": 1,
+        "start_fri": 13,
+        "start_mon": 5,
+        "start_thu": 11,
+        "start_tue": 7,
+        "start_wed": 9,
+        "type": 3
     },
     "capabilities": [
         "configurable"
@@ -45,7 +54,7 @@
     "shortName": "ClassSched",
     "uuid": "0bb26b12-8c68-44aa-bb56-35232efd4f2f",
     "versionCode": 1,
-    "versionLabel": "0.1",
+    "versionLabel": "0.5",
     "watchapp": {
         "watchface": false
     }

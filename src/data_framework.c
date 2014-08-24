@@ -40,20 +40,35 @@ Class get_class(bool isExtra, int toGet){
 	return data;
 }
 
-bool class_exists(int class){
-	bool data = 0;
-	if(class > 3){
-		data = extra_data.classes[class-4].exists[class-4];
+void set_class(Class class, int classNum, bool isExtra){
+	if(isExtra){
+		extra_data.classes[classNum] = class;
 	}
 	else{
-		data = main_data.classes[class-1].exists[class-1];
+		main_data.classes[classNum] = class;
+	}
+}
+
+bool class_exists(int class){
+	bool data = 0;
+	if(class > 2){
+		data = extra_data.classes[class-3].exists;
+	}
+	else{
+		data = main_data.classes[class].exists;
 	}
 	return data;
 }
 
-float get_class_time(int timeslot, Class class){
+float get_start_time(int timeslot, Class class){
 	float data = 0.0;
-	data = class.times[timeslot];
+	data = class.start_times[timeslot];
+	return data;
+}
+
+float get_end_time(int timeslot, Class class){
+	float data = 0.0;
+	data = class.end_times[timeslot];
 	return data;
 }
 
@@ -63,21 +78,30 @@ bool class_is_lecture(Class class){
 	return lecture;
 }
 
-void set_class_time(int timeslot, bool isExtra, int class, float data){
+void set_start_time(int timeslot, bool isExtra, int class, float data){
 	if(isExtra == 0){
-		main_data.classes[class].times[timeslot] = data;
+		main_data.classes[class].start_times[timeslot] = data;
 	}
 	else{
-		extra_data.classes[class].times[timeslot] = data;
+		extra_data.classes[class].start_times[timeslot] = data;
+	}
+}
+
+void set_end_time(int timeslot, bool isExtra, int class, float data){
+	if(isExtra == 0){
+		main_data.classes[class].end_times[timeslot] = data;
+	}
+	else{
+		extra_data.classes[class].end_times[timeslot] = data;
 	}
 }
 
 void set_exists(int class, bool isExtra, bool exists){
-	if(class > 3){
-		extra_data.classes[class-4].exists[class-4] = exists;
+	if(isExtra){
+		extra_data.classes[class].exists = exists;
 	}
 	else{
-		main_data.classes[class].exists[class] = exists;
+		main_data.classes[class].exists = exists;
 	}
 }
 

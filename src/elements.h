@@ -7,14 +7,16 @@ typedef struct persist {
 //50 bytes
 typedef struct Class {
 	bool isLecture; //1 byte
-	char prof[1][21]; //21 bytes (?)
+	char prof[1][15]; //17 bytes
 	char code[1][8]; //8 bytes
-	char name[1][21]; //21
-	float times[5]; //5 bytes*4 == ??? :P
-	bool exists[3]; //3
+	char name[1][15]; //17
+	float start_times[5]; //5 bytes*4 == ??? :P
+	float end_times[5]; //20 bytes
+	bool exists; //1
 } Class;
 
-//49*5 == 245 bytes
+//255 bytes
+//#PushingIt
 typedef struct CD {
 	Class classes[3];
 } CD;
